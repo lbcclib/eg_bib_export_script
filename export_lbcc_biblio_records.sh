@@ -23,5 +23,5 @@ EOF
 tail -n +2 lbcc_tcns_to_export.old > lbcc_tcns_to_export
 rm lbcc_tcns_to_export.old
 cd /home/opensrf/Evergreen-ILS-2.7.4/Open-ILS/src/support-scripts/
-cat /home/opensrf/records.txt | ./marc_export --store -i -c /openils/conf/opensrf_core.xml -x /openils/conf/fm_IDL.xml -f USMARC --timeout 5 > $starting_dir/eg_records_lbcc_findit.$today.mrc
+cat /home/opensrf/records.txt | ./marc_export -i -c /openils/conf/opensrf_core.xml -x /openils/conf/fm_IDL.xml -f USMARC --timeout 5 > $starting_dir/eg_records_lbcc_findit.$today.mrc
 rm $starting_dir/lbcc_tcns_to_export
