@@ -11,7 +11,7 @@ filename="lbcc_marc_records.$today.mrc"
 log_file="lbcc_marc_records.$today.log"
 
 
-psql $dbname $username << EOF
+psql $dbname $username > $log_file << EOF
 \o lbcc_tcns_to_export.old
 SELECT  DISTINCT b.id as tcn
   FROM biblio.record_entry b
@@ -22,7 +22,7 @@ SELECT  DISTINCT b.id as tcn
   AND (c.circ_lib=7
     AND c.deleted=FALSE)
   OR xpath_exists('//m:datafield[@tag="856"]/m:subfield[@code="9" and text()="LBCC"]', b.marc::xml, ARRAY[ARRAY['m','http://www.loc.gov/MARC21/slim']]);
-EOF > $log_file
+EOF
 
 tail -n +2 lbcc_tcns_to_export.old > lbcc_tcns_to_export
 rm lbcc_tcns_to_export.old
