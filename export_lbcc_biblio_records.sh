@@ -3,7 +3,7 @@
 dbname="db" #change this to appropriate value
 username="user" #change this to appropriate value
 email="sandbej at linnbenton dot edu" #change this to appropriate value
-eg_version="2.7.4" #change this when we upgrade Evergreen
+eg_version="2.9.1" #change this when we upgrade Evergreen
 
 today=$(date +"%Y-%m-%d")
 starting_dir=$(pwd)
