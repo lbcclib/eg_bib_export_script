@@ -13,15 +13,13 @@ log_file="lbcc_marc_records.$today.log"
 
 psql $dbname $username > $log_file << EOF
 \o lbcc_tcns_to_export.old
-SELECT  DISTINCT b.id as tcn
+  SELECT DISTINCT b.id as tcn
   FROM biblio.record_entry b
   INNER JOIN asset.call_number cn ON cn.record=b.id
-  INNER JOIN asset.copy c ON c.call_number=cn.id
   WHERE b.deleted=FALSE
   AND b.id != -1
-  AND (c.circ_lib=7
-    AND c.deleted=FALSE)
-  OR xpath_exists('//m:datafield[@tag="856"]/m:subfield[@code="9" and text()="LBCC"]', b.marc::xml, ARRAY[ARRAY['m','http://www.loc.gov/MARC21/slim']]);
+  AND (cn.owning_lib=7
+  AND cn.deleted=FALSE);
 EOF
 
 tail -n +2 lbcc_tcns_to_export.old > lbcc_tcns_to_export
