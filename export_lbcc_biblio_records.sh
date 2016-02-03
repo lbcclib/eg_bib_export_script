@@ -25,6 +25,6 @@ EOF
 tail -n +2 lbcc_tcns_to_export.old > lbcc_tcns_to_export
 rm lbcc_tcns_to_export.old
 cd /home/opensrf/Evergreen-ILS-$eg_version/Open-ILS/src/support-scripts/ 2>> $starting_dir/$log_file
-cat $starting_dir/lbcc_tcns_to_export | ./marc_export -i -c /openils/conf/opensrf_core.xml -x /openils/conf/fm_IDL.xml -f USMARC --timeout 5 > $starting_dir/eg_records_lbcc_findit.$today.mrc 2>> $starting_dir/$log_file
+cat $starting_dir/lbcc_tcns_to_export | ./marc_export -i -c /openils/conf/opensrf_core.xml -x /openils/conf/fm_IDL.xml -f USMARC -e UTF-8 --timeout 5 > $starting_dir/eg_records_lbcc_findit.$today.mrc 2>> $starting_dir/$log_file
 rm $starting_dir/lbcc_tcns_to_export
 cat $starting_dir/$log_file | mail -s "Completed discovery layer export" $email
